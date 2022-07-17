@@ -23,7 +23,7 @@ $(NAME):	$(LIBFT) $(OBJ_PATH) $(OBJ)
 			$(AR) $(ARFLAGS) $(NAME) $(OBJ)
 
 $(OBJ_PATH)/%.o:	$(SRC_PATH)/%.c*
-					$(CC) $(CFLAGS) -c -I$(HEADER) $< -o $@
+					$(CC) $(CFLAGS) -g -c -I$(HEADER) $< -o $@
 
 $(LIBFT):
 			make -C $(LIBFT_PATH) all

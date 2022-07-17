@@ -1,41 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_printf_print_utils.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maliew <maliew@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/12 03:03:47 by maliew            #+#    #+#             */
-/*   Updated: 2022/07/17 20:06:52 by maliew           ###   ########.fr       */
+/*   Created: 2022/07/17 19:57:25 by maliew            #+#    #+#             */
+/*   Updated: 2022/07/17 20:04:16 by maliew           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-int	ft_printf(const char *format, ...)
+int	print_width(int width, char c)
 {
-	va_list	args;
-	t_flags	*flags;
-	int		i;
-	int		count;
+	int	i;
 
 	i = 0;
-	count = 0;
-	va_start(args, format);
-	while (format[i])
+	while (i < width)
 	{
-		if (format[i] == '%' && format[i + 1])
-		{
-			flags = get_flags((char *)format, &i);
-			if (!flags)
-				return (0);
-			count += print_args(args, flags);
-			free(flags);
-		}
-		else
-			count += write(1, format + i, 1);
+		write(1, &c, 1);
 		i++;
 	}
-	va_end(args);
-	return (count);
+	return (i);
 }
