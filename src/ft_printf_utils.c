@@ -6,7 +6,7 @@
 /*   By: maliew <maliew@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/17 19:57:25 by maliew            #+#    #+#             */
-/*   Updated: 2022/07/19 01:59:43 by maliew           ###   ########.fr       */
+/*   Updated: 2022/07/19 02:28:47 by maliew           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,13 @@ void	get_neg(long *n, int *neg)
 	}
 	else
 		*neg = 0;
+}
+
+int	get_max(int a, int b)
+{
+	if (a > b)
+		return (a);
+	return (b);
 }
 
 int	get_len_base(unsigned long n, int base_len)

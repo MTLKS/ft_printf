@@ -6,7 +6,7 @@
 /*   By: maliew <maliew@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 03:00:22 by maliew            #+#    #+#             */
-/*   Updated: 2022/07/19 02:00:49 by maliew           ###   ########.fr       */
+/*   Updated: 2022/07/19 02:24:08 by maliew           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,9 @@ int		print_hex(unsigned long n, t_flags *flags, char *base, int ptr);
 
 int		print_width(int width, char c);
 void	get_neg(long *n, int *neg);
+int		get_max(int a, int b);
 int		get_len_base(unsigned long n, int base_len);
 void	print_base(unsigned long n, char *base);
-
-int		get_max(int a, int b);
-int		putstr_len(char *s, int len);
 
 int		print_args(va_list args, t_flags *flags);
 int		ft_printf(const char *format, ...);
