@@ -6,7 +6,7 @@
 /*   By: maliew <maliew@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/17 19:51:42 by maliew            #+#    #+#             */
-/*   Updated: 2022/07/19 00:34:06 by maliew           ###   ########.fr       */
+/*   Updated: 2022/07/19 01:54:59 by maliew           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,22 +63,22 @@ int	print_int(long n, t_flags *flags)
 		count += print_width(flags->wi - neg - get_max(flags->pr, l), ' ');
 	if (neg)
 		count += write(1, "-", 1);
-	if (flags->pl && !neg)
+	else if (flags->pl)
 		count += write(1, "+", 1);
-	else if (flags->sp && !neg)
+	else if (flags->sp)
 		count += write(1, " ", 1);
 	if (flags->ze && !flags->dt && !flags->da && flags->wi)
 		count += print_width(flags->wi - neg - l, '0');
 	if (flags->dt)
 		count += print_width(flags->pr - l, '0');
-	if ((flags->dt && flags->pr) || (!flags->dt && !flags->pr) || n)
+	if (!(flags->dt && !flags->pr && !n))
 		print_base(n, "0123456789");
 	if (flags->da && flags->wi)
 		count += print_width(flags->wi - neg - get_max(flags->pr, l), ' ');
 	return (count + l);
 }
 
-int	print_hex(long n, t_flags *flags, char *base, char *x)
+int	print_hex(unsigned long n, t_flags *flags, char *base, int ptr)
 {
 	int	count;
 	int	l;
@@ -86,39 +86,20 @@ int	print_hex(long n, t_flags *flags, char *base, char *x)
 	count = 0;
 	l = get_len_base(n, 16) * !(flags->dt && !flags->pr && !n);
 	if (!flags->da && (!flags->ze || flags->dt) && flags->wi)
-		count += print_width(flags->wi - get_max(flags->pr, l) - flags->ha * 2,
+		count += print_width(
+				flags->wi - get_max(flags->pr, l) - (flags->ha || ptr) * 2,
 				' ');
-	if (flags->ha && n)
-		count += write(1, x, 2);
+	if ((flags->ha && n) || ptr)
+		count += write(1, base, 2);
 	if (flags->ze && !flags->dt && !flags->da && flags->wi)
 		count += print_width(flags->wi - l, '0');
 	if (flags->dt)
 		count += print_width(flags->pr - l, '0');
-	if ((flags->dt && flags->pr) || (!flags->dt && !flags->pr) || n)
-		print_base(n, base);
+	if (!(flags->dt && !flags->pr && !n))
+		print_base(n, base + 2);
 	if (flags->da && flags->wi)
-		count += print_width(flags->wi - get_max(flags->pr, l) - flags->ha * 2,
+		count += print_width(
+				flags->wi - get_max(flags->pr, l) - (flags->ha || ptr) * 2,
 				' ');
-	return (count + l);
-}
-
-int	print_ptr(unsigned long n, t_flags *flags)
-{
-	int	count;
-	int	l;
-
-	count = 0;
-	l = get_ulen_base(n, 16) * !(flags->dt && !flags->pr && !n);
-	if (!flags->da && (!flags->ze || flags->dt) && flags->wi)
-		count += print_width(flags->wi - get_max(flags->pr, l) - 2, ' ');
-	count += write(1, "0x", 2);
-	if (flags->ze && !flags->dt && !flags->da && flags->wi)
-		count += print_width(flags->wi - l, '0');
-	if (flags->dt)
-		count += print_width(flags->pr - l, '0');
-	if ((flags->dt && flags->pr) || (!flags->dt && !flags->pr) || n)
-		print_base(n, "0123456789abcdef");
-	if (flags->da && flags->wi)
-		count += print_width(flags->wi - get_max(flags->pr, l) - 2, ' ');
 	return (count + l);
 }

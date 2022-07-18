@@ -6,7 +6,7 @@
 /*   By: maliew <maliew@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 03:03:47 by maliew            #+#    #+#             */
-/*   Updated: 2022/07/19 00:34:31 by maliew           ###   ########.fr       */
+/*   Updated: 2022/07/19 01:54:15 by maliew           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,13 @@ int	print_args(va_list args, t_flags *flags)
 		count += print_int(va_arg(args, unsigned int), flags);
 	else if (flags->sr == 'x')
 		count += print_hex(va_arg(args, unsigned int), flags,
-				"0123456789abcdef", "0x");
+				"0x0123456789abcdef", 0);
 	else if (flags->sr == 'X')
 		count += print_hex(va_arg(args, unsigned int), flags,
-				"0123456789ABCDEF", "0X");
+				"0X0123456789ABCDEF", 0);
 	else if (flags->sr == 'p')
-		count += print_ptr(va_arg(args, unsigned long), flags);
+		count += print_hex(va_arg(args, unsigned long), flags,
+				"0x0123456789abcdef", 1);
 	else if (flags->sr == '%')
 		count += write(1, "%", 1);
 	return (count);

@@ -6,7 +6,7 @@
 /*   By: maliew <maliew@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/17 19:57:25 by maliew            #+#    #+#             */
-/*   Updated: 2022/07/18 23:57:22 by maliew           ###   ########.fr       */
+/*   Updated: 2022/07/19 01:59:43 by maliew           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,22 +36,7 @@ void	get_neg(long *n, int *neg)
 		*neg = 0;
 }
 
-int	get_len_base(long n, int base_len)
-{
-	int	count;
-
-	count = 0;
-	if (!n)
-		return (1);
-	while (n > 0)
-	{
-		n /= base_len;
-		count++;
-	}
-	return (count);
-}
-
-int	get_ulen_base(unsigned long n, int base_len)
+int	get_len_base(unsigned long n, int base_len)
 {
 	int	count;
 
