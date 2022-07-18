@@ -6,11 +6,37 @@
 /*   By: maliew <maliew@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 03:03:47 by maliew            #+#    #+#             */
-/*   Updated: 2022/07/17 20:06:52 by maliew           ###   ########.fr       */
+/*   Updated: 2022/07/19 00:34:31 by maliew           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
+
+int	print_args(va_list args, t_flags *flags)
+{
+	int	count;
+
+	count = 0;
+	if (flags->sr == 'c')
+		count += print_char(va_arg(args, int), flags);
+	else if (flags->sr == 's')
+		count += print_str(va_arg(args, char *), flags);
+	else if (flags->sr == 'i' || flags->sr == 'd')
+		count += print_int(va_arg(args, int), flags);
+	else if (flags->sr == 'u')
+		count += print_int(va_arg(args, unsigned int), flags);
+	else if (flags->sr == 'x')
+		count += print_hex(va_arg(args, unsigned int), flags,
+				"0123456789abcdef", "0x");
+	else if (flags->sr == 'X')
+		count += print_hex(va_arg(args, unsigned int), flags,
+				"0123456789ABCDEF", "0X");
+	else if (flags->sr == 'p')
+		count += print_ptr(va_arg(args, unsigned long), flags);
+	else if (flags->sr == '%')
+		count += write(1, "%", 1);
+	return (count);
+}
 
 int	ft_printf(const char *format, ...)
 {
