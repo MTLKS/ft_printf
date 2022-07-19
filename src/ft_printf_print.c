@@ -6,7 +6,7 @@
 /*   By: maliew <maliew@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/17 19:51:42 by maliew            #+#    #+#             */
-/*   Updated: 2022/07/19 02:31:18 by maliew           ###   ########.fr       */
+/*   Updated: 2022/07/19 21:32:31 by maliew           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,11 @@ int	print_str(char *s, t_flags *flags)
 	if (s)
 		len = ft_strlen(s);
 	else
-		len = 0;
+		len = 6;
 	if (flags->dt && (flags->pr < len))
 		len = flags->pr;
-	if (!s && ((flags->dt && flags->pr >= 6) || (!flags->dt)))
-	{
-		str = ft_strdup("(null)");
-		len = 6;
-	}
+	if (!s)
+		str = ft_substr("(null)", 0, len);
 	else
 		str = ft_substr(s, 0, len);
 	if (!flags->da && flags->wi)
